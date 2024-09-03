@@ -31,7 +31,11 @@ func (r Bishop) GetMoves(b utils.BoardInterface) []utils.Move {
 	for _, f := range dir_funcs {
 		var x, y int
 		// !b.HasPiece(x, y)
-		for x, y = r.GetPos().GetMove(); x >= 0 && y >= 0 && x <= 7 && y <= 7 && !b.HasPiece(x, y); x, y = f(x, y) {
+		for x, y = f(r.GetPos().GetMove()); x >= 0 && y >= 0 && x <= 7 && y <= 7 && !b.HasPiece(x, y); x, y = f(x, y) {
+			moves = append(moves, utils.NewMove(y, x))
+		}
+
+		if (x >= 0 && y >= 0 && x <= 7 && y <= 7) && b.IsOpponent(x, y, r.color) {
 			moves = append(moves, utils.NewMove(y, x))
 		}
 	}

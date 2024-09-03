@@ -16,6 +16,7 @@ type PieceInterface interface {
 
 type BoardInterface interface {
 	HasPiece(int, int) bool
+	IsOpponent(int, int, int) bool
 }
 
 type Move struct {

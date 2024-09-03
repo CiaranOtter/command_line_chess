@@ -31,6 +31,10 @@ func (b *Board) HasPiece(x, y int) bool {
 	}
 }
 
+func (b *Board) IsOpponent(x, y, col int) bool {
+	return b.HasPiece(x, y) && b.Board[y][x].GetColor() != col
+}
+
 type (
 	MoveMsg struct{}
 )
@@ -191,7 +195,7 @@ func (b Board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}))
 	case MoveMsg:
 		if !b.selected {
-			b.move_list = append(b.Board[b.cursor_y][b.cursor_x].GetMoves(&b), b.Board[b.cursor_y][b.cursor_x].GetPos())
+			b.move_list = b.Board[b.cursor_y][b.cursor_x].GetMoves(&b)
 		}
 	}
 
