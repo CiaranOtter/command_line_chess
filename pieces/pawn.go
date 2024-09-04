@@ -39,11 +39,11 @@ func (p Pawn) GetMoves(b utils.BoardInterface) []utils.Move {
 		}
 	}
 
-	if c_x < 7 && forward(c_y, 1) <= 7 && forward(c_y, 1) >= 0 && b.HasPiece(c_x+1, forward(c_y, 1)) {
+	if c_x < 7 && forward(c_y, 1) <= 7 && forward(c_y, 1) >= 0 && b.HasPiece(c_x+1, forward(c_y, 1)) && b.IsOpponent(c_x+1, forward(c_y, 1), p.color) {
 		moves = append(moves, utils.NewMove(forward(c_y, 1), c_x+1))
 	}
 
-	if c_x > 0 && forward(c_y, 1) <= 7 && forward(c_y, 1) >= 0 && b.HasPiece(c_x-1, forward(c_y, 1)) {
+	if c_x > 0 && forward(c_y, 1) <= 7 && forward(c_y, 1) >= 0 && b.HasPiece(c_x-1, forward(c_y, 1)) && b.IsOpponent(c_x-1, forward(c_y, 1), p.color) {
 		moves = append(moves, utils.NewMove(forward(c_y, 1), c_x-1))
 	}
 
